@@ -55,7 +55,7 @@ const ReplenishmentWidget: React.FC<PropsWithChildrenOnly> = () => {
           }}
         />
       ) : null}
-      <Widget title={t('replenishment', { ns: 'app' })}>
+      <Widget title={'Hi'}>
         <Grid
           container
           justifyContent="flex-start"

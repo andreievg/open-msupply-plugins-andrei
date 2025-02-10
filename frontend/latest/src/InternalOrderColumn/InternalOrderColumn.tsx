@@ -9,10 +9,10 @@ import {
   Plugins,
   QueryClientProviderProxy,
 } from '@openmsupply-client/common';
-import { StockLineRowFragment } from '@openmsupply-client/system';
+import { RequestLineFragment } from '@openmsupply-client/system';
 import { usePluginData } from './api';
 
-const useColumnStore = create<PluginDataStore<StockLineRowFragment, string>>(
+const useColumnStore = create<PluginDataStore<RequestLineFragment, string>>(
   (set, get) => ({
     data: [],
     set: data => set(state => ({ ...state, data })),
@@ -21,9 +21,9 @@ const useColumnStore = create<PluginDataStore<StockLineRowFragment, string>>(
   })
 );
 
-type StockDonorColumn = NonNullable<ArrayElement<Plugins['stockColumn']>>;
+type ColumnType = NonNullable<ArrayElement<Plugins['internalOrderColumn']>>;
 
-export const StateLoader: ArrayElement<StockDonorColumn['StateLoader']> = ({
+export const StateLoader: ArrayElement<ColumnType['StateLoader']> = ({
   stockLines,
 }) => {
   const { set } = useColumnStore();
@@ -38,22 +38,22 @@ export const StateLoader: ArrayElement<StockDonorColumn['StateLoader']> = ({
   return <></>;
 };
 
-const DonorColumn = ({ rowData }: CellProps<StockLineRowFragment>) => {
+const DonorColumn = ({ rowData }: CellProps<RequestLineFragment>) => {
   const { getById } = useColumnStore();
 
   return <BasicCellLayout>{getById(rowData)?.data || ''} </BasicCellLayout>;
 };
 
-const Column = (props: CellProps<StockLineRowFragment>) => (
+const ColumnInner = (props: CellProps<RequestLineFragment>) => (
   <QueryClientProviderProxy>
     <DonorColumn {...props} />
   </QueryClientProviderProxy>
 );
 
-export const StockDonorColumn: ColumnDefinition<StockLineRowFragment> = {
-  Cell: Column,
+export const Column: ColumnDefinition<RequestLineFragment> = {
+  Cell: ColumnInner,
   key: 'stock-donor',
-  label: 'label.donor',
+  label: 'Check',
   maxWidth: 150,
   sortable: false,
   order: 103,

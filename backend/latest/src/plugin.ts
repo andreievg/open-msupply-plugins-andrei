@@ -47,7 +47,7 @@ const plugins: BackendPlugins = {
     // Fill all item_ids with default
     const response = zipObject(
       item_ids,
-      item_ids.map(() => ({ average_monthly_consumption: 3 }))
+      item_ids.map(() => ({ average_monthly_consumption: 2 }))
     );
 
     sql_result.forEach(({ item_id, consumption }) => {

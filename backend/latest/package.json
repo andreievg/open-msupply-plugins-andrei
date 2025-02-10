@@ -1,6 +1,6 @@
 {
     "//": "As a backend plugins, unlike frontend plugins 'types' here is important, it indicates to backend where this plugin should be called",
-    "name": "amc_check",
+    "name": "mynewplugin",
     "omSupplyPlugin": {
         "target": "backend",
         "types": [
