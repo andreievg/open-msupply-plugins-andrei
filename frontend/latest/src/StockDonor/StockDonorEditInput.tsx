@@ -23,7 +23,12 @@ const StyledInputRow = ({ label, Input }: InputWithLabelRowProps) => (
   />
 );
 
-const StockDonorEditInput: StockDonorEditPlugin = ({ stockLine, events }) => {
+const StockDonorEditInput: StockDonorEditPlugin = ({
+  stockLine,
+  events,
+  disableSaveButton,
+  enableSaveButton,
+}) => {
   const t = useTranslation('common');
   const [donor, setDonor] = React.useState<string>('');
   const { data: stockLineNodes } = usePluginData.data([stockLine?.id ?? '']);
@@ -45,11 +50,17 @@ const StockDonorEditInput: StockDonorEditPlugin = ({ stockLine, events }) => {
 
   return (
     <StyledInputRow
-      label={t('label.donor')}
+      label={'Blah'}
       Input={
         <BasicTextInput
           value={donor}
           onChange={e => {
+            if (e.target.value === 'good') {
+              enableSaveButton();
+            } else {
+              disableSaveButton();
+            }
+            console.log('hree', e.target.value);
             setDonor(e.target.value);
             events.setIsDirty(true);
           }}

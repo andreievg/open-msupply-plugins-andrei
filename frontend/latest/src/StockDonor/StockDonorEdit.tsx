@@ -11,10 +11,20 @@ export type StockDonorEditPlugin = NonNullable<
   ArrayElement<Plugins['stockEditForm']>
 >;
 
-const StockDonorEdit: StockDonorEditPlugin = ({ stockLine, events }) => (
+const StockDonorEdit: StockDonorEditPlugin = ({
+  stockLine,
+  events,
+  disableSaveButton,
+  enableSaveButton,
+}) => (
   <ThemeProviderProxy>
     <QueryClientProviderProxy>
-      <StockDonorEditInput stockLine={stockLine} events={events} />
+      <StockDonorEditInput
+        stockLine={stockLine}
+        events={events}
+        disableSaveButton={disableSaveButton}
+        enableSaveButton={enableSaveButton}
+      />
     </QueryClientProviderProxy>
   </ThemeProviderProxy>
 );
